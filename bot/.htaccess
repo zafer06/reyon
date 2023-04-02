@@ -1,0 +1,6 @@
+# Gelen tum istekleri index.php uzerinden alalim.
+
+RewriteEngine on
+RewriteRule ^list/$ index.php [QSA,L]
+RewriteRule ^list/([0-9+])/$ index.php/id=$1 [QSA,L]
+RewriteRule .* - [e=HTTP_AUTHORIZATION:%{HTTP:Authorization}]

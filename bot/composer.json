@@ -1,0 +1,17 @@
+{
+    "name": "solokod/bot",
+    "description": "R10 is forumlari veri cekme botu.",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Solokod\\Bot\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Zafer Celenk",
+            "email": "zafercelenk@gmail.com"
+        }
+    ],
+    "require": {}
+}

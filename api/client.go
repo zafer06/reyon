@@ -24,7 +24,7 @@ type Topic struct {
 }
 
 func GetTopicList() (TopicResponse, error) {
-	data, err := sendRequest("http://bot:4000/list")
+	data, err := sendRequest("http://bot:4003/list")
 	if err != nil {
 		return TopicResponse{}, err
 	}

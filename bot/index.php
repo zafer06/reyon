@@ -17,15 +17,10 @@ $ret = array();
 
 //if ($method == "POST" && $route == "list")
 
-if ($method == "GET") {
+if ($method == "POST") {
     try {
-        //$bot = new Crawler();
-        //$data = $bot->run_bot();
-
         $cache = new Cache();
         $data = $cache->cache_data();
-
-        // var_dump(http_status(200));
 
         $ret = array(
             "code" => 200,

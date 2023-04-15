@@ -70,7 +70,7 @@ func main() {
 
 	setLogFile()
 
-	log.Println("API server runing on 4000...")
-	http.ListenAndServe(":4000", nil)
+	log.Println("API server runing on 4002...")
+	http.ListenAndServe(":4002", nil)
 }
 

@@ -12,10 +12,11 @@ class Crawler {
     }
 
     public function run_bot() {
-        //$url = "http://localhost:8080/reyon-data.html";
+        $url = "https://www.r10.net/kodlama-isi-veren-yazilim-firmalari/";
         
         $dom = new DOMDocument('1.0');
-        @$dom->loadHTMLFile("reyon-data.html");
+        //@$dom->loadHTMLFile("reyon-data.html");
+        @$dom->loadHTMLFile($url);
         $dom->preserveWhiteSpace = false;
         
         $form = $dom->getElementById("inlinemodform");
@@ -29,8 +30,6 @@ class Crawler {
             $user = $li->getElementsByTagName("a")->item(2)->nodeValue;
             $date = $this->format_date($li->getElementsByTagName("div")->item(6)->nodeValue);
             $reply_user = $li->getElementsByTagName("div")->item(7)->nodeValue;
-            
-            //var_dump($date);
     
             $job = array(
                 "title" => $title,
@@ -43,7 +42,7 @@ class Crawler {
             array_push($job_list, $job);
         }
     
-        return $job_list;
+        return array_slice($job_list, 2);
     }
     
     private function format_date($date) {
@@ -51,7 +50,7 @@ class Crawler {
     
         $date_arr = explode(" ", $date);
         $d = $date_arr[0];
-        $t = $date_arr[1];
+        $t = one_hour_back($date_arr[1]);
     
         $today = new DateTime();
     

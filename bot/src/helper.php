@@ -73,6 +73,45 @@ function token_check($token) {
     return true;
 }
 
+function cache_time($file) {
+    $fileDate = filemtime($file);
+    $today = time();
+
+    $diff = round(($today - $fileDate) / 60);
+
+    return $diff;
+}
+
+function bot_log($mesaj) {
+    $logDosya = "log.txt";
+
+    reset_log($logDosya);
+
+    if (!file_exists($logDosya)) { // dosya yoksa
+        file_put_contents($logDosya, $mesaj . PHP_EOL);
+    } else {
+        file_put_contents($logDosya, $mesaj . PHP_EOL, FILE_APPEND);
+    }
+}
+
+function one_hour_back($time) {
+    $time_obj = DateTime::createFromFormat('H:i:s', $time);
+    $time_obj->modify('-1 hour');
+    return $time_obj->format('H:i:s');
+}
+
+function reset_log($filePath) {
+    if (file_exists($filePath)) {
+      $fileCreationTime = filectime($filePath);
+      $today = strtotime('today');
+  
+      if ($fileCreationTime < $today) {
+        unlink($filePath);
+        fopen($filePath, 'w');
+      }
+    }
+  }
+
 /*
 if (token_check($_SERVER["HTTP_AUTHORIZATION"]) == false) {
     $code = 403;

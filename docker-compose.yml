@@ -5,7 +5,7 @@ services:
       context: ./bot
       dockerfile: Dockerfile
     ports:
-      - 2003:4000
+      - 2003:4003
     volumes:
       - ./bot:/app
     networks:
@@ -15,7 +15,7 @@ services:
       context: ./api
       dockerfile: Dockerfile
     ports:
-      - 2002:4000
+      - 2002:4002
     volumes:
       - ./api:/app
     networks:

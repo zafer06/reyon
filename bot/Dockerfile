@@ -18,4 +18,4 @@ COPY . /app
 RUN composer --version
 RUN composer install
 
-CMD ["php", "-S", "0.0.0.0:4000"]
+CMD ["php", "-S", "0.0.0.0:4003"]

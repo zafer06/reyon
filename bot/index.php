@@ -4,7 +4,7 @@ namespace Solokod\Bot;
 require "vendor/autoload.php";
 require "src/helper.php";
 
-use Solokod\Bot\Crawler;
+use Solokod\Bot\Cache;
 
 $route = null; 
 if (isset($_GET["route"])) {
@@ -15,14 +15,17 @@ $code = 200;
 $method = $_SERVER["REQUEST_METHOD"];
 $ret = array();
 
-//if ($method == "POST" && $route == "list") {
+//if ($method == "POST" && $route == "list")
 
-if ($method == "POST") {
+if ($method == "GET") {
     try {
-        $bot = new Crawler();
-        $data = $bot->run_bot();
+        //$bot = new Crawler();
+        //$data = $bot->run_bot();
 
-        //var_dump(http_status(200));
+        $cache = new Cache();
+        $data = $cache->cache_data();
+
+        // var_dump(http_status(200));
 
         $ret = array(
             "code" => 200,
@@ -30,6 +33,7 @@ if ($method == "POST") {
             "error" => "",
             "data" => $data
         );
+
     } catch(Exception $e) {
         $ret = array(
             "code" => 500,

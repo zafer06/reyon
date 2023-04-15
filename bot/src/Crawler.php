@@ -65,7 +65,10 @@ class Crawler {
     
         } else {
             $arr = explode("-", $d);
-            return $arr[2] ."-". $arr[1] ."-". $arr[0] ." ". $t;
+            if (count($arr) > 1) {
+                return $arr[2] ."-". $arr[1] ."-". $arr[0] ." ". $t;
+            }
+            return "1900-01-01";
         }
     
         return $date;

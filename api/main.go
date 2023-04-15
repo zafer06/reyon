@@ -6,7 +6,6 @@ import (
 	"io"
 	"net/http"
 	"encoding/json"
-	"reyonapi/bot"
 )
 
 type Login struct {
@@ -14,7 +13,7 @@ type Login struct {
 	Password string `json:"pass"`
 }
 
-func index(w http.ResponseWriter, r *http.Request) {
+func index(w http.ResponseWriter, r *http.Request) {	
 	fmt.Fprintf(w, "Reyonapi Web Service v0.8.0")
 }
 
@@ -51,23 +50,14 @@ func login(w http.ResponseWriter, r *http.Request) {
 func list(w http.ResponseWriter, r *http.Request) {
 	log.Println("==== REYON BOT TEST PROJECT ======")
 
-	var c bot.Cache
-	var threadList = c.CacheData()
+	topicResponse, err := GetTopicList()
+	if err != nil {
+		log.Printf("JSON datasi hatali geliyor -> %s", err)
+		json.NewEncoder(w).Encode("HATA: JSON datasi hatali geliyor -- Reyonapi Web Service v0.8.0")
+		return
+	}
 
-	/*
-		for _, t := range threadList {
-			fmt.Println("========================================================")
-			fmt.Println("Title: ", t.Title)
-			fmt.Println("Link: ", t.Link)
-			fmt.Println("User: ", t.User)
-			fmt.Println("Date: ", t.Date)
-			fmt.Println("Reply: ", t.Reply)
-			fmt.Println("Description: ", t.Description)
-			fmt.Println("========================================================")
-		}
-	*/
-
-	json.NewEncoder(w).Encode(threadList)
+	json.NewEncoder(w).Encode(topicResponse)
 }
 
 func main() {

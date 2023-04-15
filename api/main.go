@@ -50,14 +50,18 @@ func login(w http.ResponseWriter, r *http.Request) {
 func list(w http.ResponseWriter, r *http.Request) {
 	log.Println("==== REYON BOT TEST PROJECT ======")
 
-	topicResponse, err := GetTopicList()
-	if err != nil {
-		log.Printf("JSON datasi hatali geliyor -> %s", err)
-		json.NewEncoder(w).Encode("HATA: JSON datasi hatali geliyor -- Reyonapi Web Service v0.8.0")
-		return
+	if r.Method == "POST" {
+		topicResponse, err := GetTopicList()
+		if err != nil {
+			log.Printf("JSON datasi hatali geliyor -> %s", err)
+			json.NewEncoder(w).Encode("HATA: JSON datasi hatali geliyor -- Reyonapi Web Service v0.8.0")
+			return
+		}
+	
+		json.NewEncoder(w).Encode(topicResponse)
+	} else {
+		json.NewEncoder(w).Encode("Error: Method not allowed")
 	}
-
-	json.NewEncoder(w).Encode(topicResponse)
 }
 
 func main() {

@@ -1,4 +1,6 @@
 vendor/
 tmp/
-reyon-data.html
 *.log
+log.txt
+reyon-data.html
+
